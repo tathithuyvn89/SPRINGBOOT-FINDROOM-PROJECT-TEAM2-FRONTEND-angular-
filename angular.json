@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "demo-hotel"
+    }
+  },
+  "defaultProject": "demo-hotel",
+  "cli": {
+    "analytics": "0b5f538d-07a3-42b7-a1e1-959dfcda0142"
+  }
 }

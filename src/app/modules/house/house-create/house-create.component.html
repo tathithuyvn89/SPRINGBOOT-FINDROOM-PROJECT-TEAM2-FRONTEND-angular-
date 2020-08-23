@@ -1,0 +1,123 @@
+<div class="wrapper">
+  //Co the chen header vao
+  <div id="content">
+    <div class="container-fruid register">
+      <div class="row">
+
+        <div class="col-md-3 register-left">
+          <img src="https://www.theskyhouse.com/wp-content/uploads/2016/03/skyhouselogo-4.png"
+               style="height: 100px; width: 200px" alt=""/>
+          <h3>Welcome</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, libero.</p>
+
+        </div>
+      </div>
+      <div class="col-md-9 register-right">
+
+        <div class="tab-content" id="myTabContent">
+
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            <div *ngIf="isShow"
+                 class="alert {{ (isSuccess) ? 'alert-success' : 'alert-danger' }}"
+                 role="alert">
+              {{message}}
+            </div>
+            <h3 class="register-heading">Add New House</h3>
+
+            <form [formGroup]="formGroup" (ngSubmit)="save()">
+              <div class="row register-form">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input formControlName="nameHouse" placeholder="Name House" type="text" class="form-control"
+                           id="nameHouse" aria-describedby="emailHelp">
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="Address" formControlName="address" type="text" class="form-control"
+                           id="address">
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="How many bedroom " formControlName="bedroomNum" type="number"
+                           class="form-control" id="bedroomNum">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <input placeholder="How many Bath Room" formControlName="bathroomNum" type="number"
+                           class="form-control" id="bathroomNum">
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="Description" formControlName="description" type="text" class="form-control"
+                           id="description">
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="Price for One Night ($)" formControlName="priceOneDay" type="number"
+                           class="form-control" id="priceOneDay">
+                  </div>
+
+                </div>
+                <div class="col-md-12">
+                  <div formGroupName="categoryHome" class="form-group col-6 float-left"
+                       style="padding: 0px!important;">
+                    <label>Category</label>
+                    <select formControlName="id">
+                      <option *ngFor="let category of categoryHomes"
+                              value="{{category.id}}">{{category.nameCategoryHome}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div formArrayName="features" *ngFor="let data of features; let i=index" class="form-group col-6 float-left">
+                    <label>
+                      <input type="checkbox" [value]="data.id" (change)="onCheckboxChange($event)"/>
+                      {{data.name}}
+                    </label>
+                  </div>
+
+                  <p class="error" *ngIf="this.formGroup.controls['features'].errors?.required">
+                    Checkbox is required, select atleast one value.
+                  </p>
+
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="text-center">
+                        <div *ngFor="let file of arrayImage">
+                          <img [src]="file.srcImg" alt="Picture of album" (click)="uploadFile.click()" height="170"
+                               width="170"
+                               class="custom-dropzone"/>
+                        </div>
+                        <div class="input-group-btn">
+                                                            <span style="margin: 0px"
+                                                                  class="fileUpload btn btn-primary">
+                                                                <span (click)="onClick()" class="upl" id="upload">Upload multiple file</span>
+                                                                <input type="file" (change)="uploadFile($event)"
+                                                                       class="upload up" id="up"
+                                                                       onchange="readURL(this);" multiple/>
+                                                              </span>
+                        </div>
+                      </div>
+                      <div *ngIf="isLoading" class=" spinner-border" role="status">
+                        <span class="  sr-only">Loading...</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+
+              <button type="submit" class="btnRegister">
+                Thêm nhà
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

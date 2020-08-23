@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoryHomeComponent } from './category-home/category-home.component';
 import {RouterModule, Routes} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
+import { FeatureCreateComponent } from './feature-home/feature-create/feature-create.component';
+import { CategoryCreateComponent } from './category-home/category-create/category-create.component';
 
 const routes: Routes = [
-  {path: 'category-create', component: CategoryHomeComponent}
+  {path: 'category-create', component: CategoryCreateComponent},
+  {path: 'feature-create', component: FeatureCreateComponent}
 ]
 
 @NgModule({
-  declarations: [CategoryHomeComponent],
+  declarations: [ FeatureCreateComponent, CategoryCreateComponent],
   imports: [
     CommonModule,ReactiveFormsModule, RouterModule.forChild(routes),FormsModule, HttpClientModule
   ]

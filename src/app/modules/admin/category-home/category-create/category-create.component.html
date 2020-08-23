@@ -1,0 +1,24 @@
+
+<div class="col-md-8">
+  <form [formGroup]="createCategory" (ngSubmit)="onSubmit()">
+    <fieldset>
+      <legend>Create Category for house</legend>
+      <p>Category</p>
+      <div class="item">
+        <label > Name<span>*</span></label>
+        <input formControlName="nameCategoryHome"  type="text" name="fname"  [ngClass]="{ 'is-invalid': submitted && f.nameCategoryHome.errors }"
+        />
+        <div *ngIf="f.nameCategoryHome.touched && f.nameCategoryHome.invalid" class="alert alert-danger">
+          <div *ngIf="f.nameCategoryHome.errors.required">Feature  is required.</div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="btn-block">
+      <button type="submit" >Submit</button>
+    </div>
+  </form>
+</div>
+
+
+
+

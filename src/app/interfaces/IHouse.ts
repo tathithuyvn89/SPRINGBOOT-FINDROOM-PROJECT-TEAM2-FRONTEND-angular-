@@ -1,7 +1,7 @@
 import {ICategoryHome} from "./ICategoryHome";
-import {IHost} from "./IHost";
 import {IFeature} from "./IFeature";
 import {IImage} from "./IImage";
+import {IUser} from "./IUser";
 
 export class IHouse {
   id?: number;
@@ -13,7 +13,7 @@ export class IHouse {
   priceOneDay?: number;
   status?: string;
   categoryHome?: ICategoryHome;
-  host?: IHost;
+  host?: IUser;
   features?: IFeature[];
   images?: IImage[];
 }

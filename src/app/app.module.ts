@@ -8,15 +8,15 @@ import {AngularFireModule} from '@angular/fire';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule} from "@angular/router";
 import {AdminModule} from "./modules/admin/admin.module";
+import {HouseModule} from "./modules/house/house.module";
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
-    BrowserModule, AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFirestoreModule,
-    AppRoutingModule, RouterModule,
-    AdminModule
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,AdminModule,HouseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

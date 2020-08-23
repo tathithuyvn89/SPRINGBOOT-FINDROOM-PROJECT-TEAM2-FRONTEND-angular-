@@ -1,21 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {RouterModule, Routes} from "@angular/router";
-import {host} from "@angular-devkit/build-angular/src/test-utils";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HostModule} from "./modules/host/host.module";
+import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
+
 
 
 const routes: Routes =[
-  {path:'host', loadChildren:()=>import('./modules/host/host.module').then(m => m.HostModule)},
-  {path: 'admin', loadChildren:() =>import('./modules/admin/admin.module').then(m =>m.AdminModule)}
+  {path: 'admin', loadChildren:() =>import('./modules/admin/admin.module').then(m =>m.AdminModule)},
+  {path: 'house', loadChildren:() =>import('./modules/house/house.module').then(m => m.HouseModule)}
 ]
 
 @NgModule({
   declarations: [],
   providers:[RouterModule],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes,{preloadingStrategy:PreloadAllModules})
   ]
 })
 export class AppRoutingModule { }

@@ -1,4 +1,4 @@
-import {ICustomer} from "./ICustomer";
+import {IUser} from "./IUser";
 import {IHost} from "./IHost";
 
 export class IBooking {
@@ -8,6 +8,6 @@ export class IBooking {
   vote?: number;
   feedback?: string;
   payment?: number;
-  customer?: ICustomer;
+  customer?: IUser;
   host?: IHost;
 }

@@ -1,0 +1,20 @@
+
+<div class="col-md-8">
+  <form [formGroup]="createFeature" (ngSubmit)="onSubmit()">
+    <fieldset>
+      <legend>Create Feature for house</legend>
+      <p>Feature</p>
+      <div class="item">
+        <label> Name<span>*</span></label>
+        <input formControlName="name" forid="fname" type="text" name="fname"  [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+        />
+        <div *ngIf="f.name.touched && f.name.invalid" class="alert alert-danger">
+          <div *ngIf="f.name.errors.required">Feature  is required.</div>
+        </div>
+      </div>
+    </fieldset>
+    <div class="btn-block">
+      <button type="submit" >Submit</button>
+    </div>
+  </form>
+</div>

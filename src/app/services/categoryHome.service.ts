@@ -1,7 +1,7 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {ICategoryHome} from "../interfaces/ICategoryHome";
-import {Observable} from "rxjs";
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {ICategoryHome} from '../interfaces/ICategoryHome';
+import {Observable} from 'rxjs';
 
 const CATEGORY_API = 'http://localhost:8080/api/v1/categoryhomes';
 
@@ -13,7 +13,7 @@ export class CategoryHomeService {
   public createCategoryHome(category: ICategoryHome): Observable<any> {
     return this.http.post(CATEGORY_API, category);
   }
-  public listCategories() : Observable<ICategoryHome[]> {
-    return this.http.get<ICategoryHome[]>(CATEGORY_API)
+  public listCategories(): Observable<ICategoryHome[]> {
+    return this.http.get<ICategoryHome[]>(CATEGORY_API);
   }
 }

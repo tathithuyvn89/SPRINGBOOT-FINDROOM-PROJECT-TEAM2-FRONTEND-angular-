@@ -8,6 +8,8 @@ import { CheckBoxComponent } from './check-box/check-box.component';
 import {AngularFireModule} from "@angular/fire";
 import {environment} from "../../../environments/environment";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
+import { HouseEditComponent } from './house-edit/house-edit.component';
+import { HouseListComponent } from './house-list/house-list.component';
 
 
 const routes: Routes =[
@@ -15,7 +17,7 @@ const routes: Routes =[
 ]
 
 @NgModule({
-    declarations: [CheckBoxComponent, HouseCreateComponent],
+    declarations: [CheckBoxComponent, HouseCreateComponent, HouseEditComponent, HouseListComponent],
     exports: [
         CheckBoxComponent,
         HouseCreateComponent

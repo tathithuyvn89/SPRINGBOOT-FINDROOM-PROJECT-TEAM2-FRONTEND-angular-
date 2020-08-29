@@ -6,17 +6,19 @@ import {environment} from '../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import {AngularFireModule} from '@angular/fire';
 import { AppRoutingModule } from './app-routing.module';
-import {RouterModule} from "@angular/router";
-import {AdminModule} from "./modules/admin/admin.module";
-import {HouseModule} from "./modules/house/house.module";
+import {RouterModule} from '@angular/router';
+import {AdminModule} from './modules/admin/admin.module';
+import {HouseModule} from './modules/house/house.module';
+import { IndexComponent } from './templates/index/index.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    IndexComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule,AdminModule,HouseModule
+    RouterModule, AdminModule, HouseModule
   ],
   providers: [],
   bootstrap: [AppComponent]

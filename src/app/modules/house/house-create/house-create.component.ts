@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
-import {IImage} from "../../../interfaces/IImage";
-import {CategoryHomeService} from "../../../services/categoryHome.service";
-import {FeatureHomeService} from "../../../services/featureHome.service";
-import {AngularFireDatabase} from "@angular/fire/database";
-import {HouseService} from "../../../services/house.service";
-import {IHouse} from "../../../interfaces/IHouse";
-import * as firebase from "firebase";
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {IImage} from '../../../interfaces/IImage';
+import {CategoryHomeService} from '../../../services/categoryHome.service';
+import {FeatureHomeService} from '../../../services/featureHome.service';
+import {AngularFireDatabase} from '@angular/fire/database';
+import {HouseService} from '../../../services/house.service';
+import {IHouse} from '../../../interfaces/IHouse';
+import * as firebase from 'firebase';
+import {IFeature} from '../../../interfaces/IFeature';
 
 
 @Component({
@@ -17,7 +18,7 @@ import * as firebase from "firebase";
 export class HouseCreateComponent implements OnInit {
   myFiles: File[] = [];
   categoryHomes: any[];
-  features: any[];
+  features: IFeature[];
   accountId: number;
   formGroup = new FormGroup({
     nameHouse: new FormControl(),
@@ -48,16 +49,16 @@ export class HouseCreateComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //Lay listCategory tu service ra
+    // Lay listCategory tu service ra
     this.categoryService.listCategories().subscribe(response => {
       this.categoryHomes = response;
       console.log(response);
-    })
-    //Lay ListFeatures tu service ra
+    });
+    // Lay ListFeatures tu service ra
     this.featureService.listFeatures().subscribe(respon => {
       this.features = respon;
       console.log(respon);
-    })
+    });
 
   }
   onCheckboxChange(e) {
@@ -66,9 +67,9 @@ export class HouseCreateComponent implements OnInit {
     if (e.target.checked) {
       checkArray.push(new FormControl(e.target.value));
     } else {
-      let i: number = 0;
+      let i = 0;
       checkArray.controls.forEach((item: FormControl) => {
-        if (item.value == e.target.value) {
+        if (item.value === e.target.value) {
           checkArray.removeAt(i);
           return;
         }
@@ -88,39 +89,45 @@ export class HouseCreateComponent implements OnInit {
       description: this.formGroup.get('description').value,
       priceOneDay: this.formGroup.get('priceOneDay').value,
       status: this.formGroup.get('status').value,
-      categoryHome: this.formGroup.get('categoryHome').value,
-      features: [
-        {id:this.formGroup.get('features').value}
-      ]
+      categoryHome: this.formGroup.get('categoryHome').value
+    };
+    const featuresArray = this.formGroup.get('features').value;
+    this.features.length = 0;
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < featuresArray.length; i++) {
+      const feature = {id: featuresArray[i]};
+      this.features.push(feature);
     }
-    house.images= this.arrayImage;
+    house.features = this.features;
+    //  Hien tai tren form dang tra ve kieu features: [id: ["1","2"]]
+    house.images = this.arrayImage;
     console.log(house);
-    if(this.isDone===true) {
+    if (this.isDone === true) {
       this.houseService.createNewHouse(house).subscribe(result => {
-        this.isShow= true;
+        this.isShow = true;
         this.isSuccess = true;
         this.message = 'Add album success';
         this.formGroup.reset();
-      },error => {
+      }, error => {
         this.isShow = true;
         this.isSuccess = false;
-        this.message= 'Add house fail';
+        this.message = 'Add house fail';
         this.formGroup.reset();
       });
-      this.arrayImage =[];
+      this.arrayImage = [];
     }
 
   }
   uploadFile(event) {
     const files = event.target.files;
-    for (let i =0; i<files.length; i++) {
+    for (let i = 0; i < files.length; i++) {
       this.myFiles.push(files[i]);
     }
     this.uploadAll();
   }
 
   private uploadAll() {
-    this.isLoading= true;
+    this.isLoading = true;
     Promise.all(
       this.myFiles.map(file => this.putStorageItem(file))
     )
@@ -134,16 +141,16 @@ export class HouseCreateComponent implements OnInit {
         console.log('Some failed: ', error.message);
         this.isLoading = false;
         this.isDone = false;
-      })
+      });
   }
 
   private putStorageItem(file): Promise<IImage>{
-     const metadata ={
+     const metadata = {
        contentType: 'image/jpeg'
      };
      console.log(file);
 
-    return new Promise<IImage>((resolve, reject) => {
+     return new Promise<IImage>((resolve, reject) => {
       firebase.storage().ref('img/' + Date.now()).put(file, metadata)
         .then(snapshot => {
           snapshot.ref.getDownloadURL().then(dowloadURL => {
@@ -151,7 +158,7 @@ export class HouseCreateComponent implements OnInit {
             resolve(images);
           });
         })
-        .catch(error =>reject(error));
+        .catch(error => reject(error));
     });
   }
   onClick() {

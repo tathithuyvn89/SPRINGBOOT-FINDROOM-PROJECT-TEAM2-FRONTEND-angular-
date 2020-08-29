@@ -4,13 +4,13 @@
     <div class="container-fruid register">
       <div class="row">
 
-        <div class="col-md-3 register-left">
-          <img src="https://www.theskyhouse.com/wp-content/uploads/2016/03/skyhouselogo-4.png"
-               style="height: 100px; width: 200px" alt=""/>
-          <h3>Welcome</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, libero.</p>
+<!--        <div class="col-md-3 register-left">-->
+<!--          <img src="https://www.theskyhouse.com/wp-content/uploads/2016/03/skyhouselogo-4.png"-->
+<!--               style="height: 100px; width: 200px" alt=""/>-->
+<!--          <h3>Welcome</h3>-->
+<!--          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, libero.</p>-->
 
-        </div>
+<!--        </div>-->
       </div>
       <div class="col-md-9 register-right">
 
@@ -82,7 +82,7 @@
                 <div class="col-md-12">
                   <div class="form-group">
                     <div class="input-group">
-                      <div class="text-center">
+                      <div class="column">
                         <div *ngFor="let file of arrayImage">
                           <img [src]="file.srcImg" alt="Picture of album" (click)="uploadFile.click()" height="170"
                                width="170"

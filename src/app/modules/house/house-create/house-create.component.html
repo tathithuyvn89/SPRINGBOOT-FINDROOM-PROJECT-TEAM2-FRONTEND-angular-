@@ -4,13 +4,6 @@
     <div class="container-fruid register">
       <div class="row">
 
-<!--        <div class="col-md-3 register-left">-->
-<!--          <img src="https://www.theskyhouse.com/wp-content/uploads/2016/03/skyhouselogo-4.png"-->
-<!--               style="height: 100px; width: 200px" alt=""/>-->
-<!--          <h3>Welcome</h3>-->
-<!--          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi, libero.</p>-->
-
-<!--        </div>-->
       </div>
       <div class="col-md-9 register-right">
 
@@ -25,7 +18,7 @@
             </div>
             <h3 class="register-heading">Add New House</h3>
 
-            <form [formGroup]="formGroup" (ngSubmit)="save()">
+            <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
               <div class="row register-form">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -79,41 +72,37 @@
                   </p>
 
                 </div>
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="column">
-                        <div *ngFor="let file of arrayImage">
-                          <img [src]="file.srcImg" alt="Picture of album" (click)="uploadFile.click()" height="170"
-                               width="170"
-                               class="custom-dropzone"/>
-                        </div>
-                        <div class="input-group-btn">
-                                                            <span style="margin: 0px"
-                                                                  class="fileUpload btn btn-primary">
-                                                                <span (click)="onClick()" class="upl" id="upload">Upload multiple file</span>
-                                                                <input type="file" (change)="uploadFile($event)"
-                                                                       class="upload up" id="up"
-                                                                       onchange="readURL(this);" multiple/>
-                                                              </span>
-                        </div>
+                <div class="form-group">
+                  <label>Upload picture of your apartment</label>
+                  <div
+                    class="custom-dropzone"
+                    ngx-dropzone
+                    [accept]="'image/*'"
+                    (change)="onSelect($event)"
+                  >
+                    <ngx-dropzone-label>
+                      <div>
+                        <h2>Drop your image here</h2>
                       </div>
-                      <div *ngIf="isLoading" class=" spinner-border" role="status">
-                        <span class="  sr-only">Loading...</span>
-                      </div>
-                    </div>
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-image-preview
+                      ngProjectAs="ngx-dropzone-preview"
+                      *ngFor="let f of myFiles"
+                      [file]="f"
+                      [removable]="true"
+                      (removed)="onRemove(f)"
+                    >
+                    </ngx-dropzone-image-preview>
                   </div>
                 </div>
-
-
               </div>
-
-              <button type="submit" class="btnRegister">
-                Thêm nhà
-              </button>
-
+                <div class="row justify-content-around">
+                  <div>
+                    <button type="submit" class="btn btn-success">Submit</button>|
+                    <button type="reset" class="btn btn-danger">Reset</button>
+                  </div>
+                </div>
             </form>
-
           </div>
 
         </div>

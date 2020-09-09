@@ -4,7 +4,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {HouseCreateComponent} from './house-create/house-create.component';
-import { CheckBoxComponent } from './check-box/check-box.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
@@ -13,24 +12,24 @@ import { HouseListComponent } from './house-list/house-list.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatButtonModule} from "@angular/material/button";
 import {MatSelectModule} from "@angular/material/select";
 import {MatIconModule} from "@angular/material/icon";
 import {DropzoneModule} from "ngx-dropzone-wrapper";
 import {NgxDropzoneModule} from "ngx-dropzone";
+import { HouseAddressComponent } from './house-address/house-address.component';
 
 
 const routes: Routes = [
   {path: 'house-create', component: HouseCreateComponent},
-  {path: 'house-test', component: CheckBoxComponent}
+  {path: 'house-address', component: HouseAddressComponent}
 ];
 
 @NgModule({
-    declarations: [CheckBoxComponent, HouseCreateComponent, HouseEditComponent, HouseListComponent],
+    declarations: [ HouseCreateComponent, HouseEditComponent, HouseListComponent, HouseAddressComponent],
     exports: [
-        CheckBoxComponent,
-        HouseCreateComponent
+        HouseCreateComponent,
+        HouseAddressComponent
     ],
   imports: [
     CommonModule, ReactiveFormsModule, RouterModule.forChild(routes), HttpClientModule,

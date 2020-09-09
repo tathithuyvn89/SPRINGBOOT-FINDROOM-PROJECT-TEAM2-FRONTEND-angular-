@@ -25,13 +25,20 @@
                     <input formControlName="nameHouse" placeholder="Name House" type="text" class="form-control"
                            id="nameHouse" aria-describedby="emailHelp">
                   </div>
-                  <div class="form-group">
-                    <input placeholder="Address" formControlName="address" type="text" class="form-control"
-                           id="address">
-                  </div>
+
                   <div class="form-group">
                     <input placeholder="How many bedroom " formControlName="bedroomNum" type="number"
                            class="form-control" id="bedroomNum">
+                  </div>
+                  <div class="form-group">
+                    <div formGroupName="categoryHome" class="form-group col-6 float-left"
+                         style="padding: 0px!important;">
+                      <label>Category</label>
+                      <select formControlName="id">
+                        <option *ngFor="let category of categoryHomes"
+                                value="{{category.id}}">{{category.nameCategoryHome}}</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -48,18 +55,12 @@
                            class="form-control" id="priceOneDay">
                   </div>
 
+
                 </div>
+
                 <div class="col-md-12">
-                  <div formGroupName="categoryHome" class="form-group col-6 float-left"
-                       style="padding: 0px!important;">
-                    <label>Category</label>
-                    <select formControlName="id">
-                      <option *ngFor="let category of categoryHomes"
-                              value="{{category.id}}">{{category.nameCategoryHome}}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-12">
+                  <div>Feature</div>
+
                   <div formArrayName="features" *ngFor="let data of features; let i=index" class="form-group col-6 float-left">
                     <label>
                       <input type="checkbox" [value]="data.id" (change)="onCheckboxChange($event)"/>

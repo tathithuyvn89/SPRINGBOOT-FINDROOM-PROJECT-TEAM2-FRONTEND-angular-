@@ -11,6 +11,7 @@ import {IFeature} from '../../../interfaces/IFeature';
 import Swal from 'sweetalert2'
 import {IDropdownSettings} from "ng-multiselect-dropdown";
 import {UploadService} from "../../../services/upload.service";
+
 const TOAST = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -69,12 +70,16 @@ export class HouseCreateComponent implements OnInit {
   isLoading = false;
   isDone = false;
   house: IHouse;
+  // provinceControl= new FormControl();
+  // optionProvinces: string[]=[];
+  // filteredOptionProvinces: Observable<string[]>
   constructor(
     private db: AngularFireDatabase,
     private categoryService: CategoryHomeService,
     private featureService: FeatureHomeService,
     private houseService: HouseService,
-    private fileUploadService: UploadService
+    private fileUploadService: UploadService,
+    // private provinceService: ProvinceService
   ) {}
 
   ngOnInit(): void {
@@ -88,10 +93,25 @@ export class HouseCreateComponent implements OnInit {
       this.features = respon;
       console.log(respon);
     });
-
+    //Lay thanh pho ra tu service
+    //  this.provinceService.showAllProvinces().subscribe(result =>{
+    //    console.log(result);
+    //    for (let i=0; i<result.length; i++) {
+    //      this.optionProvinces.push(result[i].provinceName)
+    //    }
+    //    console.log(this.optionProvinces)
+    //  })
+    //Lay ra filter
+    //   this.filteredOptionProvinces = this.provinceControl.valueChanges.pipe(
+    //     startWith(''),
+    //     map(value => this._filteredProvince(value))
+    //   )
   }
-
-
+  //
+  // private _filteredProvince(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
+  //   return this.optionProvinces.filter(option => option.toLowerCase().indexOf(filterValue)===0)
+  // }
 
 
  async onSubmit() {
@@ -106,7 +126,7 @@ export class HouseCreateComponent implements OnInit {
     console.log('saving');
    this.house = {
      nameHouse: this.formGroup.get('nameHouse').value,
-     address: this.formGroup.get('address').value,
+     // address: this.formGroup.get('address').value,
      bedroomNum: this.formGroup.get('bedroomNum').value,
      bathroomNum: this.formGroup.get('bathroomNum').value,
      description: this.formGroup.get('description').value,

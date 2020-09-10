@@ -3,8 +3,8 @@
 <mat-form-field>
   <mat-label>Select Province</mat-label>
   <mat-select formControlName="province" (selectionChange)="onProvinceChange()">
-    <mat-option *ngFor="let province of allProvinces" [value]="province">
-      {{province.name}}
+    <mat-option *ngFor="let province of allProvinces" [value]="province.id">
+      {{province.provinceName}}
     </mat-option>
   </mat-select>
   <mat-error *ngIf="province.hasError('required')">
@@ -15,12 +15,20 @@
   <mat-form-field>
     <mat-label>Select District</mat-label>
     <mat-select formControlName="district" (selectionChange)="onDistrictsChange($event)">
-      <mat-option *ngFor="let district of filteredDistricts" [value]="district">
-        {{district.name}}
+      <mat-option *ngFor="let district of filteredDistricts" [value]="district.id">
+        {{district.districtName}}
       </mat-option>
     </mat-select>
     <mat-error *ngIf="district.hasError('required')">
       District required
+    </mat-error>
+  </mat-form-field>
+  <br/>
+  <mat-form-field>
+    <mat-label>Dia chi cu the</mat-label>
+    <input matInput formControlName="address" placeholder="Address">
+    <mat-error *ngIf="address.hasError('required')">
+      Address required
     </mat-error>
   </mat-form-field>
   <br/>

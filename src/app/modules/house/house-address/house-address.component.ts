@@ -4,6 +4,8 @@ import {ProvinceService} from "../../../services/province.service";
 import {IDistrict} from "../../../interfaces/IDistrict";
 import {IProvince} from "../../../interfaces/IProvince";
 import {IAddress} from "../../../interfaces/IAddress";
+import {LocalStorageService} from "../../../services/localStorage.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-house-address',
@@ -16,14 +18,17 @@ allDistricts: IDistrict[];
 filteredDistricts : IDistrict[];
  constructor(
    private fb: FormBuilder,
-   private provinceService: ProvinceService) {}
+   private provinceService: ProvinceService,
+   private localStorageService: LocalStorageService,
+   private route: Router) {}
 
   ngOnInit() {
    this.provinceService.showAllProvinces().subscribe( result =>{
      this.allProvinces = result;
    })
     this.provinceService.getAllDistricts().subscribe(data =>{
-     this.allDistricts = data;
+     this.allDistricts= data;
+
     })
   }
 addressForm = this.fb.group({
@@ -64,9 +69,11 @@ addressForm = this.fb.group({
    console.log(address);
     this.provinceService.saveAddress(address).subscribe(data =>{
       console.log(data)
+      this.localStorageService.saveAddressId(data.id);
     });
 
     this.resetForm();
+    this.route.navigate(['house/house-create']);
   }
   resetForm() {
   this.filteredDistricts= [];

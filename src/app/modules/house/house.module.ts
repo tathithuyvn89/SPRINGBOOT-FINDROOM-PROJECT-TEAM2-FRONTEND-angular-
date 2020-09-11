@@ -7,7 +7,6 @@ import {HouseCreateComponent} from './house-create/house-create.component';
 import {AngularFireModule} from '@angular/fire';
 import {environment} from '../../../environments/environment';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-import { HouseEditComponent } from './house-edit/house-edit.component';
 import { HouseListComponent } from './house-list/house-list.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -26,7 +25,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    declarations: [ HouseCreateComponent, HouseEditComponent, HouseListComponent, HouseAddressComponent],
+    declarations: [ HouseCreateComponent, HouseListComponent, HouseAddressComponent],
     exports: [
         HouseCreateComponent,
         HouseAddressComponent
